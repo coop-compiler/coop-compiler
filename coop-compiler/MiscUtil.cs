@@ -38,9 +38,8 @@ namespace coop_builder
             return (sha.ToLower() == shaUsRom.ToLower());
         }
 
-        public static bool VersionCheck(string path)
+        public static bool VersionCheck(string remoteVersion)
         {
-            string remoteVersion = File.ReadAllText(path).Trim();
             string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             return remoteVersion == version;
         }

@@ -39,7 +39,7 @@ namespace coop_builder
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             ShowPanel(null);
             logUtil = new LogUtil(this, this.rtbOutput, this.customProgressBar1);

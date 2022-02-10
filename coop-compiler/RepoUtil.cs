@@ -43,8 +43,7 @@ namespace coop_builder
         public static string intelHdFix32     = "https://github.com/coop-compiler/coop-compiler/raw/32-bit/intel-hd/opengl32.dll";
         public static string intelHdFix64     = "https://github.com/coop-compiler/coop-compiler/raw/64-bit/intel-hd/opengl32.dll";
 
-        public static string compilerUrl      = "https://github.com/coop-compiler/coop-compiler/raw/master/exe/coop-compiler.exe";
-        public static string versionUrl       = "https://github.com/coop-compiler/coop-compiler/raw/master/exe/version.txt";
-
+        public static string releaseApiUrl   = "https://api.github.com/repos/coop-compiler/coop-compiler/releases/latest";
+        public static string releaseExeUrl   = "https://github.com/coop-compiler/coop-compiler/releases/latest/download/coop-compiler.exe";
     }
 }

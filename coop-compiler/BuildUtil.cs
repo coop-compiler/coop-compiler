@@ -258,13 +258,11 @@ namespace coop_builder
                 if (!cmdlineUtil.isUpdatedCompiler)
                 {
                     SetStage("checking compiler version");
-                    string verUrl = RepoUtil.versionUrl;
-                    string verPath = downloadsDir + @"\version.txt";
-                    await DownloadAsync(verUrl, verPath);
-                    if (!MiscUtil.VersionCheck(verPath))
+                    string remoteVersion = await RestUtil.GetSloppyAsync(RepoUtil.releaseApiUrl, "tag_name");
+                    if (remoteVersion != null && !MiscUtil.VersionCheck(remoteVersion))
                     {
                         SetStage("downloading new compiler version");
-                        string compilerUrl = RepoUtil.compilerUrl;
+                        string compilerUrl = RepoUtil.releaseExeUrl;
                         string compilerPath = coopCompilerNewPath;
                         await DownloadAndExecuteNewCompiler(cmdlineUtil.currentExePath, compilerUrl, compilerPath);
                         logUtil.EndThread();
