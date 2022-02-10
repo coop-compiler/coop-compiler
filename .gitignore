@@ -1,0 +1,8 @@
+.vs
+32-bit
+64-bit
+publish.sh
+publish.bat
+coop-compiler/bin
+coop-compiler/obj
+**/__pycache__
