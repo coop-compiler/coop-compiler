@@ -320,10 +320,10 @@ namespace coop_builder
                 if (!File.Exists(exePath)) { throw new Exception("Could not find exe") ; }
                 foreach (string f in Directory.GetFiles(buildDir))
                 {
-                    string[] spl = f.Replace("\\", "/").Split('/');
-                    string filename = spl[spl.Length - 1];
-                    if (f.ToLower().EndsWith(".exe") || f.ToLower().EndsWith(".dll"))
+                    if (f.ToLower().EndsWith(".exe") || f.ToLower().EndsWith(".dll") || f.ToLower().EndsWith(".map"))
                     {
+                        string[] spl = f.Replace("\\", "/").Split('/');
+                        string filename = spl[spl.Length - 1];
                         await CopyFileAsync(f, binDir + "\\" + filename);
                     }
                 }

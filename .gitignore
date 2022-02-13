@@ -6,3 +6,4 @@ publish.bat
 coop-compiler/bin
 coop-compiler/obj
 **/__pycache__
+exe
