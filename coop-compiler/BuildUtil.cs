@@ -234,7 +234,7 @@ namespace coop_builder
             {
                 // cleanup old files
                 SetStage("cleanup old files");
-                string binDir = dirUtil.WritePath("bin");
+                string binDir = dirUtil.WritePathNear("bin");
                 string downloadsDir = dirUtil.WritePath("downloads");
                 string environmentDir = dirUtil.WritePath("environment");
                 string tmpDir = dirUtil.WritePath("tmp");

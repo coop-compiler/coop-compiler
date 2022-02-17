@@ -7,6 +7,7 @@ namespace coop_builder
     {
         private string[] searchPaths;
         private string writeDir = null;
+        private string writeNearDir = null;
         public string exePath = null;
         public string romPath = null;
 
@@ -23,11 +24,9 @@ namespace coop_builder
             {
                 if (path == null) { continue; }
                 if (path.Length == 0) { continue; }
-                if (IsDirectoryWritable(path))
-                {
-                    writeDir = path;
-                    break;
-                }
+                if (!IsDirectoryWritable(path)) { continue; }
+                if (writeNearDir == null) { writeNearDir = path; }
+                writeDir = path;
             }
 
             if (writeDir == null)
@@ -83,6 +82,11 @@ namespace coop_builder
         public string WritePath(string path)
         {
             return writeDir + "\\" + path;
+        }
+
+        public string WritePathNear(string path)
+        {
+            return writeNearDir + "\\" + path;
         }
 
         public string UpdatedCompilerUrl()
