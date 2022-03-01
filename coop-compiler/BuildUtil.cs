@@ -83,6 +83,8 @@ namespace coop_builder
 
         private async Task CopyDirectoryAsync(string source, string dest)
         {
+            if (source.Contains("\\.git")) { return; }
+
             logUtil.Log("\nCopying '" + source + "'", LogUtil.section);
 
             if (!Directory.Exists(source)) { throw new Exception("Could not find directory: " + source); }
@@ -109,6 +111,7 @@ namespace coop_builder
             foreach (DirectoryInfo dirInfo in sourceDir.GetDirectories("*", SearchOption.AllDirectories))
             {
                 string dirPath = dirInfo.FullName;
+                if (dirPath.Contains("\\.git")) { continue; }
                 string outputPath = dirPath.Replace(sourceDir.FullName, destDir.FullName + "\\");
                 Directory.CreateDirectory(outputPath);
                 logUtil.Log("  - " + dirPath.Replace(sourceDir.FullName, ""), LogUtil.subSection);
@@ -178,7 +181,7 @@ namespace coop_builder
             await RunProgramInternal(filename, arguments, workingDirectory, path);
         }
 
-        private async Task DownloadAndExecuteNewCompiler(string currentExePath, string compilerUrl, string compilerPath)
+        private async Task DownloadAndExecuteNewCompiler(string currentExePath, string compilerUrl, string compilerPath, bool buildDirectX)
         {
             await DownloadAsync(compilerUrl, compilerPath);
 
@@ -186,7 +189,7 @@ namespace coop_builder
             {
                 FileName = compilerPath,
                 WorkingDirectory = Environment.CurrentDirectory,
-                Arguments = "--update-compiler \"" + Environment.CurrentDirectory + "\" \"" + currentExePath + "\"",
+                Arguments = "--update-compiler \"" + Environment.CurrentDirectory + "\" \"" + currentExePath + "\"" + (buildDirectX ? " --directx" : ""),
             };
             await Task.Run(() => Process.Start(startInfo));
         }
@@ -218,7 +221,7 @@ namespace coop_builder
             }
         }
 
-        public async Task<bool> BuildAsync()
+        public async Task<bool> BuildAsync(bool buildDirectX)
         {
             logUtil.StartThread();
 
@@ -232,6 +235,8 @@ namespace coop_builder
 
             try
             {
+                bool is64bit = Environment.Is64BitOperatingSystem;
+
                 // cleanup old files
                 SetStage("cleanup old files");
                 string binDir = dirUtil.WritePathNear("bin");
@@ -264,7 +269,7 @@ namespace coop_builder
                         SetStage("downloading new compiler version");
                         string compilerUrl = RepoUtil.releaseExeUrl;
                         string compilerPath = coopCompilerNewPath;
-                        await DownloadAndExecuteNewCompiler(cmdlineUtil.currentExePath, compilerUrl, compilerPath);
+                        await DownloadAndExecuteNewCompiler(cmdlineUtil.currentExePath, compilerUrl, compilerPath, buildDirectX);
                         logUtil.EndThread();
                         Application.Exit();
                     }
@@ -272,15 +277,14 @@ namespace coop_builder
 
                 // download environment
                 SetStage("download and extract environment");
-                string envUrl = Environment.Is64BitOperatingSystem ? RepoUtil.environmentUrl64 : RepoUtil.environmentUrl32;
+                string envUrl = is64bit ? RepoUtil.environmentUrl64 : RepoUtil.environmentUrl32;
                 string envZip = downloadsDir + @"\environment.zip";
-                string tmpEnvDir = Environment.Is64BitOperatingSystem ? dirUtil.WritePath(RepoUtil.tmpEnvironment64) : dirUtil.WritePath(RepoUtil.tmpEnvironment32);
+                string tmpEnvDir = is64bit ? dirUtil.WritePath(RepoUtil.tmpEnvironment64) : dirUtil.WritePath(RepoUtil.tmpEnvironment32);
                 await DeleteDirectoryAsync(tmpEnvDir);
                 await DownloadAsync(envUrl, envZip);
                 await UnzipAsync(envZip, environmentDir + "\\..");
                 await DeleteFileAsync(envZip);
                 await DirectoryMoveAsync(tmpEnvDir, environmentDir);
-                //await CopyDirectoryAsync(@"\\vmware-host\Shared Folders\_VM_CONNECTION\32-bit", environmentDir);
 
                 // download source code
                 SetStage("download and extract source");
@@ -306,9 +310,12 @@ namespace coop_builder
                 SetStage("making build");
                 string workingDir = environmentDir + "\\" + RepoUtil.game.ExtractedFolder();
                 string pathDir = environmentDir + @"\bin";
+                string makeParams = "WINDOWS_AUTO_BUILDER=1 -j2";
+                if (buildDirectX) { makeParams = "RENDER_API=D3D11 WINDOW_API=DXGI " + makeParams; }
+                if (is64bit) { makeParams += " TARGET_BITS=64"; } else { makeParams += " TARGET_BITS=32"; }
                 await RunProgram(
                     @"make.exe",
-                    "WINDOWS_AUTO_BUILDER=1 -j2",
+                    makeParams,
                     workingDir,
                     pathDir
                     );
@@ -345,7 +352,7 @@ namespace coop_builder
                 if (MiscUtil.IsIntelHd())
                 {
                     SetStage("getting opengl fix for intel hd");
-                    string intelUrl = Environment.Is64BitOperatingSystem ? RepoUtil.intelHdFix64 : RepoUtil.intelHdFix32;
+                    string intelUrl = is64bit ? RepoUtil.intelHdFix64 : RepoUtil.intelHdFix32;
                     string intelPath = binDir + @"\opengl32.dll";
                     await DownloadAsync(intelUrl, intelPath);
                 }*/

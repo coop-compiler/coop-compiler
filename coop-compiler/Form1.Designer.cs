@@ -31,6 +31,7 @@ namespace coop_builder
         {
             this.panelBuild = new System.Windows.Forms.Panel();
             this.rtbOutput = new System.Windows.Forms.RichTextBox();
+            this.customProgressBar1 = new coop_builder.CustomProgressBar();
             this.panelMain = new System.Windows.Forms.Panel();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.pctDiscord = new System.Windows.Forms.PictureBox();
@@ -40,7 +41,7 @@ namespace coop_builder
             this.pctRom = new System.Windows.Forms.PictureBox();
             this.lblRomIncorrect = new System.Windows.Forms.Label();
             this.lblRomHeader = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelRomBottom = new System.Windows.Forms.Panel();
             this.btnRom = new System.Windows.Forms.Button();
             this.panelSuccess = new System.Windows.Forms.Panel();
             this.lblSuccessDescription = new System.Windows.Forms.Label();
@@ -53,18 +54,28 @@ namespace coop_builder
             this.panelFailedBottom = new System.Windows.Forms.Panel();
             this.btnFailedDiscord = new System.Windows.Forms.Button();
             this.btnFailedSaveLog = new System.Windows.Forms.Button();
-            this.customProgressBar1 = new coop_builder.CustomProgressBar();
+            this.panelRenderer = new System.Windows.Forms.Panel();
+            this.panelOGL = new System.Windows.Forms.Panel();
+            this.lblOGL = new System.Windows.Forms.Label();
+            this.btnOpenGL = new System.Windows.Forms.Button();
+            this.panelDX = new System.Windows.Forms.Panel();
+            this.lblDX = new System.Windows.Forms.Label();
+            this.btnDirectX11 = new System.Windows.Forms.Button();
+            this.lblRendererTitle = new System.Windows.Forms.Label();
             this.panelBuild.SuspendLayout();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctDiscord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctLogo)).BeginInit();
             this.panelRom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctRom)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.panelRomBottom.SuspendLayout();
             this.panelSuccess.SuspendLayout();
             this.panelSuccessBottom.SuspendLayout();
             this.panelFailed.SuspendLayout();
             this.panelFailedBottom.SuspendLayout();
+            this.panelRenderer.SuspendLayout();
+            this.panelOGL.SuspendLayout();
+            this.panelDX.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelBuild
@@ -93,6 +104,17 @@ namespace coop_builder
             this.rtbOutput.TabIndex = 3;
             this.rtbOutput.Text = "";
             this.rtbOutput.WordWrap = false;
+            // 
+            // customProgressBar1
+            // 
+            this.customProgressBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(0)))));
+            this.customProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.customProgressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(0)))));
+            this.customProgressBar1.Location = new System.Drawing.Point(0, 302);
+            this.customProgressBar1.Name = "customProgressBar1";
+            this.customProgressBar1.Size = new System.Drawing.Size(454, 23);
+            this.customProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.customProgressBar1.TabIndex = 9;
             // 
             // panelMain
             // 
@@ -173,7 +195,7 @@ namespace coop_builder
             this.panelRom.Controls.Add(this.pctRom);
             this.panelRom.Controls.Add(this.lblRomIncorrect);
             this.panelRom.Controls.Add(this.lblRomHeader);
-            this.panelRom.Controls.Add(this.panel1);
+            this.panelRom.Controls.Add(this.panelRomBottom);
             this.panelRom.Location = new System.Drawing.Point(8, 343);
             this.panelRom.Name = "panelRom";
             this.panelRom.Size = new System.Drawing.Size(454, 325);
@@ -218,15 +240,15 @@ namespace coop_builder
             this.lblRomHeader.Text = "Select ROM file";
             this.lblRomHeader.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // panel1
+            // panelRomBottom
             // 
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.btnRom);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 231);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(454, 94);
-            this.panel1.TabIndex = 7;
+            this.panelRomBottom.BackColor = System.Drawing.Color.Transparent;
+            this.panelRomBottom.Controls.Add(this.btnRom);
+            this.panelRomBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelRomBottom.Location = new System.Drawing.Point(0, 231);
+            this.panelRomBottom.Name = "panelRomBottom";
+            this.panelRomBottom.Size = new System.Drawing.Size(454, 94);
+            this.panelRomBottom.TabIndex = 7;
             // 
             // btnRom
             // 
@@ -392,16 +414,117 @@ namespace coop_builder
             this.btnFailedSaveLog.UseVisualStyleBackColor = false;
             this.btnFailedSaveLog.Click += new System.EventHandler(this.btnFailedSaveLog_Click);
             // 
-            // customProgressBar1
+            // panelRenderer
             // 
-            this.customProgressBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(0)))));
-            this.customProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.customProgressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(0)))));
-            this.customProgressBar1.Location = new System.Drawing.Point(0, 302);
-            this.customProgressBar1.Name = "customProgressBar1";
-            this.customProgressBar1.Size = new System.Drawing.Size(454, 23);
-            this.customProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.customProgressBar1.TabIndex = 9;
+            this.panelRenderer.BackgroundImage = global::coop_builder.Properties.Resources.background;
+            this.panelRenderer.Controls.Add(this.panelOGL);
+            this.panelRenderer.Controls.Add(this.panelDX);
+            this.panelRenderer.Controls.Add(this.lblRendererTitle);
+            this.panelRenderer.Location = new System.Drawing.Point(925, 343);
+            this.panelRenderer.Name = "panelRenderer";
+            this.panelRenderer.Size = new System.Drawing.Size(454, 325);
+            this.panelRenderer.TabIndex = 8;
+            // 
+            // panelOGL
+            // 
+            this.panelOGL.BackColor = System.Drawing.Color.Transparent;
+            this.panelOGL.Controls.Add(this.lblOGL);
+            this.panelOGL.Controls.Add(this.btnOpenGL);
+            this.panelOGL.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelOGL.Location = new System.Drawing.Point(227, 96);
+            this.panelOGL.Margin = new System.Windows.Forms.Padding(0);
+            this.panelOGL.Name = "panelOGL";
+            this.panelOGL.Padding = new System.Windows.Forms.Padding(16, 25, 16, 16);
+            this.panelOGL.Size = new System.Drawing.Size(227, 229);
+            this.panelOGL.TabIndex = 11;
+            // 
+            // lblOGL
+            // 
+            this.lblOGL.BackColor = System.Drawing.Color.Transparent;
+            this.lblOGL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblOGL.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOGL.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(0)))));
+            this.lblOGL.Location = new System.Drawing.Point(16, 74);
+            this.lblOGL.Name = "lblOGL";
+            this.lblOGL.Padding = new System.Windows.Forms.Padding(0, 0, 8, 0);
+            this.lblOGL.Size = new System.Drawing.Size(195, 139);
+            this.lblOGL.TabIndex = 11;
+            this.lblOGL.Text = "\r\n(recommended)\r\n\r\n+ More heavily tested\r\n\r\n+ Mouse controls work\r\n\r\n- Old comput" +
+    "ers might just show a white screen";
+            // 
+            // btnOpenGL
+            // 
+            this.btnOpenGL.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(0)))));
+            this.btnOpenGL.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOpenGL.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnOpenGL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenGL.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold);
+            this.btnOpenGL.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(0)))));
+            this.btnOpenGL.Location = new System.Drawing.Point(16, 25);
+            this.btnOpenGL.Margin = new System.Windows.Forms.Padding(6);
+            this.btnOpenGL.Name = "btnOpenGL";
+            this.btnOpenGL.Size = new System.Drawing.Size(195, 49);
+            this.btnOpenGL.TabIndex = 10;
+            this.btnOpenGL.Text = "OpenGL";
+            this.btnOpenGL.UseVisualStyleBackColor = false;
+            this.btnOpenGL.Click += new System.EventHandler(this.btnOpenGL_Click);
+            // 
+            // panelDX
+            // 
+            this.panelDX.BackColor = System.Drawing.Color.Transparent;
+            this.panelDX.Controls.Add(this.lblDX);
+            this.panelDX.Controls.Add(this.btnDirectX11);
+            this.panelDX.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelDX.Location = new System.Drawing.Point(0, 96);
+            this.panelDX.Margin = new System.Windows.Forms.Padding(0);
+            this.panelDX.Name = "panelDX";
+            this.panelDX.Padding = new System.Windows.Forms.Padding(16, 25, 16, 16);
+            this.panelDX.Size = new System.Drawing.Size(227, 229);
+            this.panelDX.TabIndex = 10;
+            // 
+            // lblDX
+            // 
+            this.lblDX.BackColor = System.Drawing.Color.Transparent;
+            this.lblDX.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDX.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDX.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(179)))), ((int)(((byte)(255)))));
+            this.lblDX.Location = new System.Drawing.Point(16, 74);
+            this.lblDX.Name = "lblDX";
+            this.lblDX.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.lblDX.Size = new System.Drawing.Size(195, 139);
+            this.lblDX.TabIndex = 10;
+            this.lblDX.Text = "\r\n(not recommended)\r\n\r\n- Less tested\r\n\r\n- Mouse controls don\'t work\r\n\r\n+ May work" +
+    " on old machines";
+            // 
+            // btnDirectX11
+            // 
+            this.btnDirectX11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(179)))), ((int)(((byte)(255)))));
+            this.btnDirectX11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDirectX11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDirectX11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDirectX11.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold);
+            this.btnDirectX11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(80)))));
+            this.btnDirectX11.Location = new System.Drawing.Point(16, 25);
+            this.btnDirectX11.Margin = new System.Windows.Forms.Padding(27, 28, 27, 28);
+            this.btnDirectX11.Name = "btnDirectX11";
+            this.btnDirectX11.Size = new System.Drawing.Size(195, 49);
+            this.btnDirectX11.TabIndex = 9;
+            this.btnDirectX11.Text = "DirectX 11";
+            this.btnDirectX11.UseVisualStyleBackColor = false;
+            this.btnDirectX11.Click += new System.EventHandler(this.btnDirectX11_Click);
+            // 
+            // lblRendererTitle
+            // 
+            this.lblRendererTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblRendererTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblRendererTitle.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold);
+            this.lblRendererTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(0)))));
+            this.lblRendererTitle.Location = new System.Drawing.Point(0, 0);
+            this.lblRendererTitle.Name = "lblRendererTitle";
+            this.lblRendererTitle.Size = new System.Drawing.Size(454, 96);
+            this.lblRendererTitle.TabIndex = 0;
+            this.lblRendererTitle.Text = "Select Renderer";
+            this.lblRendererTitle.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // Form1
             // 
@@ -409,6 +532,7 @@ namespace coop_builder
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1384, 677);
+            this.Controls.Add(this.panelRenderer);
             this.Controls.Add(this.panelFailed);
             this.Controls.Add(this.panelSuccess);
             this.Controls.Add(this.panelRom);
@@ -424,11 +548,14 @@ namespace coop_builder
             ((System.ComponentModel.ISupportInitialize)(this.pctLogo)).EndInit();
             this.panelRom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pctRom)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.panelRomBottom.ResumeLayout(false);
             this.panelSuccess.ResumeLayout(false);
             this.panelSuccessBottom.ResumeLayout(false);
             this.panelFailed.ResumeLayout(false);
             this.panelFailedBottom.ResumeLayout(false);
+            this.panelRenderer.ResumeLayout(false);
+            this.panelOGL.ResumeLayout(false);
+            this.panelDX.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -458,7 +585,15 @@ namespace coop_builder
         private CustomProgressBar customProgressBar1;
         private System.Windows.Forms.Panel panelSuccessBottom;
         private System.Windows.Forms.Panel panelFailedBottom;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelRomBottom;
+        private System.Windows.Forms.Panel panelRenderer;
+        private System.Windows.Forms.Label lblRendererTitle;
+        private System.Windows.Forms.Panel panelOGL;
+        private System.Windows.Forms.Label lblOGL;
+        private System.Windows.Forms.Button btnOpenGL;
+        private System.Windows.Forms.Panel panelDX;
+        private System.Windows.Forms.Label lblDX;
+        private System.Windows.Forms.Button btnDirectX11;
     }
 }
 

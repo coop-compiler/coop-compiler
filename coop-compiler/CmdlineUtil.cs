@@ -9,6 +9,7 @@ namespace coop_builder
     public class CmdlineUtil
     {
         public bool isUpdatedCompiler = false;
+        public bool buildDirectX = false;
         public string workingDir = null;
         public string currentExePath = null;
         public string oldExePath = null;
@@ -19,16 +20,18 @@ namespace coop_builder
 
             CmdlineUtil util = new CmdlineUtil();
             util.isUpdatedCompiler = false;
+            util.buildDirectX = false;
             util.currentExePath = args[0];
             util.workingDir = Environment.CurrentDirectory;
             util.oldExePath = null;
 
             // see if we're running the updated exe
-            if (args.Length != 4) { return util; }
+            if (args.Length != 4 && args.Length != 5) { return util; }
             if (args[1] != "--update-compiler") { return util; }
             if (args[2].Length == 0) { return util; }
             if (args[3].Length == 0) { return util; }
             if (!args[3].ToLower().EndsWith(".exe")) { return util; }
+            if (args.Length == 5 && args[4].Trim() == "--directx") { util.buildDirectX = true; }
 
             util.isUpdatedCompiler = true;
             util.workingDir = args[2];

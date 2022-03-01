@@ -31,6 +31,12 @@ namespace coop_builder
                 panel.Visible = true;
             }
 
+            if (panel == panelRenderer)
+            {
+                panelOGL.Width = panel.Width / 2;
+                panelDX.Width = panel.Width / 2;
+            }
+
             foreach (Panel p in this.Controls)
             {
                 if (p == panel) { continue; }
@@ -62,7 +68,7 @@ namespace coop_builder
                 CmdlineUtil cmdlineUtil = CmdlineUtil.Get();
                 if (cmdlineUtil.isUpdatedCompiler)
                 {
-                    _ = StartBuildAsync();
+                    _ = StartBuildAsync(cmdlineUtil.buildDirectX);
                     return;
                 }
                 lblRomIncorrect.Visible = false;
@@ -77,12 +83,12 @@ namespace coop_builder
         {
         }
 
-        private async Task StartBuildAsync()
+        private async Task StartBuildAsync(bool buildDirectX)
         {
             ShowPanel(panelBuild);
             this.FormBorderStyle = FormBorderStyle.Sizable;
             this.MaximizeBox = true;
-            bool built = await buildUtil.BuildAsync();
+            bool built = await buildUtil.BuildAsync(buildDirectX);
             if (!built)
             {
                 lblFailedDescription.Text = "The build failed during '" + buildUtil.stage + "'\n\nPost the log to the #help-desk channel";
@@ -102,15 +108,15 @@ namespace coop_builder
                 return;
             }
 
-            await StartBuildAsync();
+            ShowPanel(panelRenderer);
         }
 
         private void btnRom_Click(object sender, EventArgs e)
         {
-            // if rom is already found, just build
+            // if rom is already found, pick renderer
             if (dirUtil.romPath != null)
             {
-                _ = StartBuildAsync();
+                ShowPanel(panelRenderer);
                 return;
             }
 
@@ -140,9 +146,9 @@ namespace coop_builder
             File.Copy(romFilename, dstPath, true);
             dirUtil.FindFiles();
 
-            // build
+            // renderer
             lblRomIncorrect.Visible = false;
-            _ = StartBuildAsync();
+            ShowPanel(panelRenderer);
         }
 
         private void pctDiscord_Click(object sender, EventArgs e)
@@ -181,6 +187,16 @@ namespace coop_builder
             };
             Process.Start(startInfo);
             Application.Exit();
+        }
+
+        private void btnDirectX11_Click(object sender, EventArgs e)
+        {
+            _ = StartBuildAsync(true);
+        }
+
+        private void btnOpenGL_Click(object sender, EventArgs e)
+        {
+            _ = StartBuildAsync(false);
         }
     }
 }
