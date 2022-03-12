@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -210,6 +212,7 @@ namespace coop_builder
                 {
                     if (i >= iterations - 1)
                     {
+                        Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
                         logUtil.Log("Exception: " + ex.ToString(), LogUtil.error);
                         return;
                     }
@@ -325,6 +328,8 @@ namespace coop_builder
                 string buildDir = environmentDir + "\\" + RepoUtil.game.ExtractedFolder() + @"\build\us_pc";
                 string exePath = buildDir + @"\sm64.us.f3dex2e.exe";
                 if (!File.Exists(exePath)) { throw new Exception("Could not find exe") ; }
+                if (Directory.Exists(buildDir + @"\res")) { await CopyDirectoryAsync(buildDir + @"\res", binDir + @"\res"); }
+                if (Directory.Exists(buildDir + @"\dynos")) { await CopyDirectoryAsync(buildDir + @"\dynos", binDir + @"\dynos"); }
                 foreach (string f in Directory.GetFiles(buildDir))
                 {
                     if (f.ToLower().EndsWith(".exe") || f.ToLower().EndsWith(".dll") || f.ToLower().EndsWith(".map"))
@@ -367,6 +372,7 @@ namespace coop_builder
             }
             catch (Exception ex)
             {
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
                 logUtil.Log("\nException: " + ex.ToString(), LogUtil.error);
                 ret = false;
             }
