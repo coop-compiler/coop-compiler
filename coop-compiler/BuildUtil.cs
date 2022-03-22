@@ -313,7 +313,7 @@ namespace coop_builder
                 SetStage("making build");
                 string workingDir = environmentDir + "\\" + RepoUtil.game.ExtractedFolder();
                 string pathDir = environmentDir + @"\bin";
-                string makeParams = "WINDOWS_AUTO_BUILDER=1 -j2";
+                string makeParams = "WINDOWS_AUTO_BUILDER=1 -j2 CC=cc.exe CXX=g++.exe SHELL=sh.exe";
                 if (buildDirectX) { makeParams = "RENDER_API=D3D11 WINDOW_API=DXGI " + makeParams; }
                 if (is64bit) { makeParams += " TARGET_BITS=64"; } else { makeParams += " TARGET_BITS=32"; }
                 await RunProgram(

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace coop_builder
@@ -14,6 +15,8 @@ namespace coop_builder
             public string message;
             public Color color;
         }
+
+        public static Regex ansiRegex = new Regex(@"\x1B\[[^@-~]*[@-~]");
 
         public static Color stage = Color.DarkGoldenrod;
         public static Color section = Color.CornflowerBlue;
@@ -45,7 +48,7 @@ namespace coop_builder
                 rtb.SelectionLength = 0;
                 rtb.SelectionColor = color;
             }
-
+            line = ansiRegex.Replace(line, "");
             rtb.AppendText(line);
             cpb.Speed();
         }
