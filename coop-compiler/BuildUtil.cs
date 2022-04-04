@@ -253,7 +253,14 @@ namespace coop_builder
                 await DeleteDirectoryAsync(tmpDir);
                 if (!cmdlineUtil.isUpdatedCompiler)
                 {
-                    await DeleteFileAsync(coopCompilerNewPath);
+                    try
+                    {
+                        await DeleteFileAsync(coopCompilerNewPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        logUtil.Log("\nException: " + ex.ToString(), LogUtil.error);
+                    }
                 }
 
                 // create directories

@@ -91,8 +91,15 @@ namespace coop_builder
             bool built = await buildUtil.BuildAsync(buildDirectX);
             if (!built)
             {
-                lblFailedDescription.Text = "The build failed during '" + buildUtil.stage + "'\n\nPost the log to the #help-desk channel";
-                ShowPanel(panelFailed);
+                if (rtbOutput.Text.Contains("python3.exe: error while loading shared libraries: ?:"))
+                {
+                    ShowPanel(panelRuntime);
+                }
+                else
+                {
+                    lblFailedDescription.Text = "The build failed during '" + buildUtil.stage + "'\n\nPost the log to the #help-desk channel";
+                    ShowPanel(panelFailed);
+                }
             }
             else
             {
@@ -197,6 +204,11 @@ namespace coop_builder
         private void btnOpenGL_Click(object sender, EventArgs e)
         {
             _ = StartBuildAsync(false);
+        }
+
+        private void btnRuntime_Click(object sender, EventArgs e)
+        {
+            MiscUtil.OpenUrl("https://download.microsoft.com/download/0/6/4/064F84EA-D1DB-4EAA-9A5C-CC2F0FF6A638/vc_redist.x86.exe");
         }
     }
 }

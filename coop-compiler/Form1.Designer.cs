@@ -62,6 +62,11 @@ namespace coop_builder
             this.lblDX = new System.Windows.Forms.Label();
             this.btnDirectX11 = new System.Windows.Forms.Button();
             this.lblRendererTitle = new System.Windows.Forms.Label();
+            this.panelRuntime = new System.Windows.Forms.Panel();
+            this.lblRuntime = new System.Windows.Forms.Label();
+            this.lblRuntimeTitle = new System.Windows.Forms.Label();
+            this.panelRuntimeBottom = new System.Windows.Forms.Panel();
+            this.btnRuntime = new System.Windows.Forms.Button();
             this.panelBuild.SuspendLayout();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctDiscord)).BeginInit();
@@ -76,6 +81,8 @@ namespace coop_builder
             this.panelRenderer.SuspendLayout();
             this.panelOGL.SuspendLayout();
             this.panelDX.SuspendLayout();
+            this.panelRuntime.SuspendLayout();
+            this.panelRuntimeBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelBuild
@@ -526,12 +533,79 @@ namespace coop_builder
             this.lblRendererTitle.Text = "Select Renderer";
             this.lblRendererTitle.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // panelRuntime
+            // 
+            this.panelRuntime.BackgroundImage = global::coop_builder.Properties.Resources.background;
+            this.panelRuntime.Controls.Add(this.lblRuntime);
+            this.panelRuntime.Controls.Add(this.lblRuntimeTitle);
+            this.panelRuntime.Controls.Add(this.panelRuntimeBottom);
+            this.panelRuntime.Location = new System.Drawing.Point(8, 674);
+            this.panelRuntime.Name = "panelRuntime";
+            this.panelRuntime.Size = new System.Drawing.Size(454, 325);
+            this.panelRuntime.TabIndex = 9;
+            this.panelRuntime.Visible = false;
+            // 
+            // lblRuntime
+            // 
+            this.lblRuntime.BackColor = System.Drawing.Color.Transparent;
+            this.lblRuntime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblRuntime.Font = new System.Drawing.Font("Tahoma", 15.75F);
+            this.lblRuntime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(179)))), ((int)(((byte)(255)))));
+            this.lblRuntime.Location = new System.Drawing.Point(0, 96);
+            this.lblRuntime.Name = "lblRuntime";
+            this.lblRuntime.Size = new System.Drawing.Size(454, 135);
+            this.lblRuntime.TabIndex = 5;
+            this.lblRuntime.Text = "You are missing a runtime from Microsoft.\r\n\r\nIt must be installed before coop-com" +
+    "piler can work.";
+            this.lblRuntime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblRuntimeTitle
+            // 
+            this.lblRuntimeTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblRuntimeTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblRuntimeTitle.Font = new System.Drawing.Font("Tahoma", 27.75F, System.Drawing.FontStyle.Bold);
+            this.lblRuntimeTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(100)))), ((int)(((byte)(0)))));
+            this.lblRuntimeTitle.Location = new System.Drawing.Point(0, 0);
+            this.lblRuntimeTitle.Name = "lblRuntimeTitle";
+            this.lblRuntimeTitle.Size = new System.Drawing.Size(454, 96);
+            this.lblRuntimeTitle.TabIndex = 0;
+            this.lblRuntimeTitle.Text = "Missing Runtime";
+            this.lblRuntimeTitle.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // panelRuntimeBottom
+            // 
+            this.panelRuntimeBottom.BackColor = System.Drawing.Color.Transparent;
+            this.panelRuntimeBottom.Controls.Add(this.btnRuntime);
+            this.panelRuntimeBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelRuntimeBottom.Location = new System.Drawing.Point(0, 231);
+            this.panelRuntimeBottom.Name = "panelRuntimeBottom";
+            this.panelRuntimeBottom.Size = new System.Drawing.Size(454, 94);
+            this.panelRuntimeBottom.TabIndex = 6;
+            // 
+            // btnRuntime
+            // 
+            this.btnRuntime.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnRuntime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(179)))), ((int)(((byte)(255)))));
+            this.btnRuntime.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRuntime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRuntime.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold);
+            this.btnRuntime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(25)))), ((int)(((byte)(80)))));
+            this.btnRuntime.Location = new System.Drawing.Point(140, 21);
+            this.btnRuntime.Margin = new System.Windows.Forms.Padding(27, 28, 27, 28);
+            this.btnRuntime.Name = "btnRuntime";
+            this.btnRuntime.Size = new System.Drawing.Size(174, 49);
+            this.btnRuntime.TabIndex = 4;
+            this.btnRuntime.Text = "Download";
+            this.btnRuntime.UseVisualStyleBackColor = false;
+            this.btnRuntime.Click += new System.EventHandler(this.btnRuntime_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1384, 677);
+            this.ClientSize = new System.Drawing.Size(1384, 1007);
+            this.Controls.Add(this.panelRuntime);
             this.Controls.Add(this.panelRenderer);
             this.Controls.Add(this.panelFailed);
             this.Controls.Add(this.panelSuccess);
@@ -556,6 +630,8 @@ namespace coop_builder
             this.panelRenderer.ResumeLayout(false);
             this.panelOGL.ResumeLayout(false);
             this.panelDX.ResumeLayout(false);
+            this.panelRuntime.ResumeLayout(false);
+            this.panelRuntimeBottom.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -594,6 +670,11 @@ namespace coop_builder
         private System.Windows.Forms.Panel panelDX;
         private System.Windows.Forms.Label lblDX;
         private System.Windows.Forms.Button btnDirectX11;
+        private System.Windows.Forms.Panel panelRuntime;
+        private System.Windows.Forms.Label lblRuntime;
+        private System.Windows.Forms.Label lblRuntimeTitle;
+        private System.Windows.Forms.Panel panelRuntimeBottom;
+        private System.Windows.Forms.Button btnRuntime;
     }
 }
 
