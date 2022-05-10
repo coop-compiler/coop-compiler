@@ -32,7 +32,7 @@ namespace coop_builder
             }
         }
 
-        public static Repo game = new Repo("djoslin0", "sm64ex-coop", "unstable");
+        public static Repo game = new Repo("djoslin0", "sm64ex-coop", "coop");
 
         public static string tmpEnvironment32 = "coop-compiler-32-bit";
         public static string tmpEnvironment64 = "coop-compiler-64-bit";
