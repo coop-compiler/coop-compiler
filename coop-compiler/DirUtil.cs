@@ -55,7 +55,7 @@ namespace coop_builder
 
         public void FindFiles()
         {
-            exePath = FindFile("bin\\sm64.us.f3dex2e.exe");
+            exePath = FindFile("sm64ex-coop\\sm64.us.f3dex2e.exe");
             romPath = FindFile("rom\\baserom.us.z64");
             if (romPath != null && !MiscUtil.ValidRom(romPath))
             {

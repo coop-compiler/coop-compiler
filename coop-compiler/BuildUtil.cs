@@ -242,7 +242,7 @@ namespace coop_builder
 
                 // cleanup old files
                 SetStage("cleanup old files");
-                string binDir = dirUtil.WritePathNear("bin");
+                string binDir = dirUtil.WritePathNear("sm64ex-coop");
                 string downloadsDir = dirUtil.WritePath("downloads");
                 string environmentDir = dirUtil.WritePath("environment");
                 string tmpDir = dirUtil.WritePath("tmp");
@@ -337,6 +337,7 @@ namespace coop_builder
                 if (!File.Exists(exePath)) { throw new Exception("Could not find exe") ; }
                 if (Directory.Exists(buildDir + @"\res")) { await CopyDirectoryAsync(buildDir + @"\res", binDir + @"\res"); }
                 if (Directory.Exists(buildDir + @"\dynos")) { await CopyDirectoryAsync(buildDir + @"\dynos", binDir + @"\dynos"); }
+                if (Directory.Exists(buildDir + @"\lang")) { await CopyDirectoryAsync(buildDir + @"\lang", binDir + @"\lang"); }
                 foreach (string f in Directory.GetFiles(buildDir))
                 {
                     if (f.ToLower().EndsWith(".exe") || f.ToLower().EndsWith(".dll") || f.ToLower().EndsWith(".map"))
