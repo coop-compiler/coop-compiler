@@ -1,4 +1,5 @@
-prefix=../
+#!sh
+prefix=..
 exec_prefix=${prefix}
 exec_prefix_set=no
 libdir=${exec_prefix}/lib
@@ -36,17 +37,18 @@ while test $# -gt 0; do
       echo $exec_prefix
       ;;
     --version)
-      echo 2.0.14
+      echo 2.26.4
       ;;
     --cflags)
       echo -I${prefix}/include/SDL2  -Dmain=SDL_main
       ;;
     --libs)
-      echo -L${exec_prefix}/lib  -lmingw32 -lSDL2main -lSDL2 -mwindows 
+      echo -L${exec_prefix}/lib   -lmingw32 -mwindows -lSDL2main -lSDL2
       ;;
     --static-libs)
 #    --libs|--static-libs)
-      echo -L${exec_prefix}/lib -lmingw32 -lSDL2main -lSDL2 -mwindows  -lmingw32 -ldinput8 -lshell32 -lsetupapi -ladvapi32 -luuid -lversion -loleaut32 -lole32 -limm32 -lwinmm -lgdi32 -luser32 -lm  -mwindows -Wl,--no-undefined -pipe -Wl,--dynamicbase,--high-entropy-va,--nxcompat,--default-image-base-high 
+      sdl_static_libs=$(echo " -lmingw32 -mwindows -lSDL2main -lSDL2  -lmingw32 -mwindows -lSDL2main -lSDL2  -lm -luser32 -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lversion -luuid -ladvapi32 -lsetupapi -lshell32 -ldinput8" | sed -E "s#-lSDL2[ $]#$libdir/libSDL2.a #g")
+      echo -L${exec_prefix}/lib $sdl_static_libs
       ;;
     *)
       echo "${usage}" 1>&2
